@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Fluid animation canvas</title>
+	</head>
+	<body style="hight: 100vh; width: 100vw; background-color: red">
+		<section>
+			<div class="fluidanimationcanvas w-embed">
+				<style>
+					canvas {
+						width: 100%;
+						max-width: 100%;
+						height: 100%;
+						position: absolute;
+						top: 0%;
+						right: 0%;
+						bottom: 0%;
+						left: 0%;
+						z-index: -1;
+					}
+				</style>
+				<canvas id="fluidCanvas" width="0" height="0"></canvas>
+			</div>
+		</section>
+
+		<script type="text/javascript">
+			function loadFluidScript() {
+				if (screen.width > 960) {
+					var head = document.getElementsByTagName('head')[0];
+					var script = document.createElement('script');
+					script.type = 'text/javascript';
+					script.src = 'https://cdn.jsdelivr.net/gh/Libero793/KNGURUWebsite3.0@latest/js/script.js';
+					head.appendChild(script);
+					console.log('running fluid animation script');
+				}
+			}
+
+			// Check the flag every 100 milliseconds.
+			// If the flag is not set (loading animation has finished), execute the fluid script.
+			var checkInterval = setInterval(function () {
+				var loadingAnimationRunning = sessionStorage.getItem('loadingAnimationRunning');
+				if (!loadingAnimationRunning) {
+					clearInterval(checkInterval); // Stop checking
+					loadFluidScript(); // Execute the fluid script
+				}
+			}, 1000);
+		</script>
+	</body>
+</html>
